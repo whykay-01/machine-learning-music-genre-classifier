@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "ml-capstone"
+version = "0.1.0"
+description = "virtual environment for machine learning capstone"
+authors = ["Yan <100032599+whykay-01@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
