@@ -1,36 +1,46 @@
-### Movie Recommendation Machine Learning Model
+### Song Classification Machine Learning Model
 
 ---
 
 #### Preamble:
 
-In 2006, Netflix released over 100 million ratings from over 400,000 users on over 17,000 films. Whoever improved the RMSE of Netflix’s “Cinematch” algorithm by 10% within 5 years received $1,000,000. Here, we revisit this notorious contest by using a subset of this dataset, with a different test set than the original contest.
+Spotify released an API that reports the audio features of its songs, such as “tempo” or “energy”. Here, we will use these features of 50k randomly picked songs to predict the genre that the song belongs to.
 
 ---
 
 #### Data:
 
-Data: The file dataSet.zip contains two files: data.txt and movieTitles.csv
+The original dataset is contained in the file dataSet/musicData.csv. In this file, the first row represents the column headers. Each row after that represents data from one song.
 
-The data.txt file contains the ratings from the ~400k users on 5k movies, in the following format: Each row represents either a movie id, or a movie rating. If a row contains only a number followed by a colon e.g.
-758:
-it represents that the following rows represent the ratings for the 758th movie in the dataset, until
-encountering the row that contains only
-759:
-the following rows represent the ratings for the 759th movie in the dataset, until the next number/column only row.
-
-Rows between those contain a first integer, a second integer and a date, from left to right, separated by commas. The first integer represents the id of the user (from 1 to ~400k) that gave the rating, the second integer represents the rating given by that user to the movie with the last encountered movie id (the integer before the colon). This second integer will always be a number between 1 and 5, representing a rating of 1 to 5 stars. There are no half-stars. The date is the date on which the user rated the movie, in YYYY-MM-DD format. The movieTitles.csv file contains information as to which movie is represented by the movie id in the data.txt file. For instance, the movies “758” and “759” mentioned above are “Mean Girls” and “Fifteen Minutes”, respectively. Each row in this file represents a movie, the first column is the movie id (corresponding to the number in front of the colon of the rows in the data.txt file), the 2nd column contains the release date and the 3rd column the movie title. Strictly speaking, this file is provided for your edification only – it probably won’t have much impact on your model performance per se.
-
-However, this could be a good source of material for the extra observations. For instance, how
-does release date impact rating, how about the interval between release data and rating date, how
-about the linguistic features of the title? Have titles gotten shorter over time, etc.
+The columns represent, in order (from left to right):
+Column 1: unique Spotify ID of each song
+Column 2: artist name
+Column 3: song name
+Column 4: popularity of the music (what percentage of users know about it, from 0 to 99%)  
+Column 5: acousticness (an audio feature) on a scale from 0 to 1
+Column 6: danceability (an audio feature) on a scale from 0 to 1
+Column 7: the duration of the music (in milliseconds)
+Column 8: energy (an auditory feature) on a scale from 0 to 1
+Column 9: instrumentality (an audio feature) on a scale from 0 to 1
+Column 10: key of the song (in musical notation)
+Column 11: liveness (an audio feature) on a scale from 0 to 1
+Column 12: loudness (in dB relative to some threshold)
+Column 13: mode of the song (musical)
+Column 14: speechiness (an audio feature), on a scale from 0 to 1
+Column 15: tempo (in beats)
+Column 16: obtained date (when was this information obtained from Spotify)
+Column 17: valence (an audio feature), on a scale from 0 to 1
+Column 18: Genre of the song (there are 10 different genres, e.g. “Rock” or “Country”)
 
 ---
 
 #### Some key challenges for this project:
 
-- The ratings data is natively provided in a large text file. With the ratings of each movie just glued one after each other. You need to find a way to parse this file, extract the relevant information and put it into some kind of usable format (likely an array or dataframe).
-- There is lots of missing data. In fact, most of the data will be missing. Most users have not rated most of the movies. You will need to find a way to handle that, either by imputation or in some other way. There might even be information in the missing data (as this might reflect a choice by a user NOT to see a movie that they anticipated not to enjoy)
-- There is lots of data. This is genuinely a “big” dataset, so you need a model/infrastructure that can handle that. Don’t build a model that will take months to train, as you don’t have that much time.
-- The movie ratings themselves (per movie) are unlikely to be normally distributed.
-- There might be temporal or seasonal effects in movie ratings. You do not have to include that information in your model (as to when a movie was rated), but you can expect the model to improve if you do so. However, doing so will be challenging (you would have to model some kind of temporal or seasonal kernel). So including this kind of information is optional (but could be interesting, if you like to be challenged).
+- There is randomly missing data, e.g. some of the durations of some of the songs are missing, as well as some of the auditory feature values. There are not many missing values, but you have to handle them somehow, either by imputation or by removing the missing data in some reasonable way.
+- The acoustic features are unlikely to be normally distributed.
+- Some of the data is provided in string format, e.g. the key. This will need to be transformed into numerical data to be useful.
+- Some of the data is provided in categorical format, e.g. mode. This will need to be dummy coded.
+- The category labels of the genres will need to be transformed into numerical labels.
+- As this is a multi-class classification (not just binary), you need to be careful – only if the predicted classification of a genre in the test set matches the actual genre of a song is the classification correct. In other words, there are many more ways to be wrong than to be right.
+- Make sure not to normalize categorical values (like mode) for the purposes of doing dimensionality reduction.
+- There might be information in the linguistic properties of artist and song, but you don’t have to include that you in your model.
