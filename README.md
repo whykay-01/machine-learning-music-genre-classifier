@@ -13,10 +13,12 @@ Spotify released an API that reports the audio features of its songs, such as �
 The original dataset is contained in the file dataSet/musicData.csv. In this file, the first row represents the column headers. Each row after that represents data from one song.
 
 The columns represent, in order (from left to right):
+
+```
 Column 1: unique Spotify ID of each song
 Column 2: artist name
 Column 3: song name
-Column 4: popularity of the music (what percentage of users know about it, from 0 to 99%)  
+Column 4: popularity of the music (what percentage of users know about it, from 0 to 99%)
 Column 5: acousticness (an audio feature) on a scale from 0 to 1
 Column 6: danceability (an audio feature) on a scale from 0 to 1
 Column 7: the duration of the music (in milliseconds)
@@ -31,6 +33,7 @@ Column 15: tempo (in beats)
 Column 16: obtained date (when was this information obtained from Spotify)
 Column 17: valence (an audio feature), on a scale from 0 to 1
 Column 18: Genre of the song (there are 10 different genres, e.g. “Rock” or “Country”)
+```
 
 ---
 
@@ -44,3 +47,7 @@ Column 18: Genre of the song (there are 10 different genres, e.g. “Rock” or 
 - As this is a multi-class classification (not just binary), you need to be careful – only if the predicted classification of a genre in the test set matches the actual genre of a song is the classification correct. In other words, there are many more ways to be wrong than to be right.
 - Make sure not to normalize categorical values (like mode) for the purposes of doing dimensionality reduction.
 - There might be information in the linguistic properties of artist and song, but you don’t have to include that you in your model.
+
+```
+
+```
