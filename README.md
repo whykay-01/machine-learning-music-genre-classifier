@@ -50,7 +50,7 @@ Column 18: Genre of the song (there are 10 different genres, e.g. “Rock” or 
 
 Structure of the project
 
-```text
+```bash
 .
 ├── capstone_data_cleaning.ipynb (1)
 ├── capstone_dimension_reduction.ipynb (2)
