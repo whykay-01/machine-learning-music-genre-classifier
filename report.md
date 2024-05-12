@@ -45,15 +45,17 @@ Structure of the project and the files I am going to be referring to throughout 
 
 Beggining of the report.
 
-#### A: how I build my model?
+#### A: how I build my model and ?
 
-#### B: how I made my design choices?
+I build various models, including Perceptron, Deep Neural Network with 2 layers, Multivariate Logistic Regression, and a Decision Tree Classifier. I build all of them after I performed a thorough data cleaning and dimension reduction, which allowed me to extract the most important features from the original dataset, and further operate on them to achieve the best results in this song classification task.
 
-#### C: how I handled challenges imposed by the dataset?
+#### B: how I handled challenges imposed by the dataset?
 
-#### D: visualizations of ROC curves, clusterings
+I have to say that the original dataset was a mess to work with, as it contained a number of missing values, uninterpretable signs, such as question marks `?` for the fields which were supposed to be NaNs, `-1` values for the duration of some songs, and etc. I had to examine all those minor details and handle them accordingly. All the detail steps could be found in the `capstone_data_cleaning.ipynb` file. After the data cleaning, I performed a dimensionality reduction using PCA and LDA methods, which allowed me to extract the most important features from the original dataset. I used PCA to see what the data loadings The reduced datasets could be found in the `classifications/reducedDataSets` directory.
 
-#### E: the most important factor underlying my classification success
+#### C: visualizations of ROC curves, clusterings
+
+#### D: the most important factor underlying my classification success
 
 <figure>
   <img src="pics/fig1.png" alt="Fig. 1.1 - Confusion marix for perceptron" height="300">
